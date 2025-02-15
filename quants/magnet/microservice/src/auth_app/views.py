@@ -3,13 +3,19 @@ from django.http import JsonResponse
 from .business.auth import AuthBusiness
 
 
-def index(request):
-    return HttpResponse("Hello, world AUTH. You're at the polls index. :)")
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
-def authenticate_view(request):
-    try:
-        auth_business = AuthBusiness()
-        auth_response = auth_business.authenticate(request)
-        return JsonResponse({"message": "Authentication successful", "data": auth_response}, status=200)
-    except Exception as e:
-        return JsonResponse({"error": str(e)}, status=400)
+
+class AuthenticateView(APIView):
+    def post(self, request):
+        try:
+            auth_business = AuthBusiness()
+            auth_response = auth_business.authenticate(request)
+            return Response({"message": "Authentication successful", "data": auth_response}, status=status.HTTP_200_OK)
+            #print("OOOK")
+            #
+            #return Response({"message": "Authentication successful", "data": auth_response}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

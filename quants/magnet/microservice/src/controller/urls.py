@@ -17,12 +17,13 @@ Including another URLconf
 #from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.contrib.auth.decorators import login_required
 
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path("auth/", include("auth_app.urls")),
-    path("breeds/", include("breed_app.urls")),
-    path("dogs/", include("dog_app.urls")),
-    path("answer/", include("answer_app.urls"))
+    path("breeds/", login_required(include("breed_app.urls"))),
+    path("dogs/", login_required(include("dog_app.urls"))),
+    path("answer/", login_required(include("answer_app.urls")))
 ]
