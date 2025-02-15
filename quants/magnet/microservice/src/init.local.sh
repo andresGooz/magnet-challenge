@@ -2,10 +2,10 @@
 
 #chmod +x init.local.sh
 #sudo ./init.local.sh
-python -m venv python_environment
-virtualenv python_environment
+#python -m venv python_environment
+#virtualenv python_environment
 source python_environment/bin/activate
-pip freeze > requirements.txt
+## --pip freeze > requirements.txt remueve todo
 pip list
 pip install -r ./requirements.txt
 pip list
