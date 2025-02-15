@@ -1,9 +1,9 @@
 from django.urls import path
-from django.urls import include
-from . import views
+#from django.urls import include
+from .views import AuthenticateView
 
 
 urlpatterns = [
-    path('api-auth/', include('rest_framework.urls')),
-    path("", views.index, name="index"),
+    #path('api-auth/', include('rest_framework.urls')),
+    path('', AuthenticateView.as_view(), name='authenticate'),
 ]
